@@ -1,24 +1,19 @@
+import React from "react";
 import { NextPage } from "next";
-import styled from "styled-components";
+import TodoList from "../components/TodoList";
+import { TodoType } from "../types/todo";
 
-const Container = styled.div`
-    padding : 20px;
-`
+const todos: TodoType[] = [
+    { id : 1 , text: "마트 가서 장보기1", color :"blue" , checked : false},
+    { id : 2 , text: "마트 가서 장보기2", color :"green" , checked : false},
+    { id : 3 , text: "마트 가서 장보기3", color :"orange" , checked : true},
+    { id : 4 , text: "마트 가서 장보기4", color :"yellow" , checked : true},
+    { id : 5 , text: "마트 가서 장보기5", color :"navy", checked : false},
+    { id : 6 , text: "마트 가서 장보기6", color :"red" , checked : false},
+];
 
-const index: NextPage = () => {
-    return (
-        <Container>
-            <h1> hello typescript</h1>
-            <h2> hello typescript</h2>
-            <p>hello typescript</p>
-            <ul>
-                <li>
-                hello typescript
-                </li>
-            </ul>
-            <a> hello typescript</a>
-            <span>hello typescript</span>
-        </Container>);
+const app: NextPage = () => {
+    return <TodoList todos={todos}/>;
 };
 
-export default index;
+export default app;

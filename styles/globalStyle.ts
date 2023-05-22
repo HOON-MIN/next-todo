@@ -14,7 +14,6 @@ const globalStyle = css`
 
 const GlobalStyle = createGlobalStyle`
     ${globalStyle}
-  
 `;
 
 export default GlobalStyle;
