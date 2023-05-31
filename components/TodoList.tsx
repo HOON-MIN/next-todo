@@ -2,6 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import palette from '../styles/palette';
 import { TodoType } from '../types/todo';
+import CheckMarkIcon from '../statics/svg/check_mark.svg';
+import TrahCanIcon from '../statics/svg/trash-can.svg';
 
 const Container = styled.div`
     width: '100%';
@@ -87,6 +89,32 @@ const Container = styled.div`
                 margin-left: 12px;
                 font-size: 16px;
             }
+        }
+    }
+    .todo-right-side {
+        display: flex;
+        margin-right: 12px;
+        svg {
+            &:first-child {
+                margin-right: 16px;
+            }
+        }
+        .todo-trash-can {
+            width: 24px;
+            path {
+                fill: ${palette.deep_red};
+            }
+        }
+        .todo-check-mark {
+            fill: ${palette.deep_green};
+        }
+        .todo-button {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid ${palette.gray};
+            background-color: transparent;
+            outline: none;
         }
     }
 `;
@@ -176,6 +204,15 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                         <div className="todo-left-side">
                             <div className={`todo-color-block bg-${todo.color}`} />
                             <p className={`todo-text ${todo.checked ? 'checked-todo-text' : ''}`}>{todo.text}</p>
+                        </div>
+                        <div className="todo-right-side">
+                            {todo.checked && (
+                                <>
+                                    <TrahCanIcon className="todo-trash-can" onClick={() => {}} />
+                                    <CheckMarkIcon className="todo-check-mark" onClick={() => {}} />
+                                </>
+                            )}
+                            {!todo.checked && <button type="button" className="todo-button" onClick={() => {}} />}
                         </div>
                     </li>
                 ))}
