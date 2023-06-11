@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
 import palette from '../styles/palette';
 import { TodoType } from '../types/todo';
 import CheckMarkIcon from '../statics/svg/check_mark.svg';
 import TrahCanIcon from '../statics/svg/trash-can.svg';
+import styled from 'styled-components';
 
 const Container = styled.div`
     width: '100%';
@@ -181,7 +181,6 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
         });
         return colors;
     }, [todos]);
-    console.log(todoColorNums);
 
     return (
         <Container>
