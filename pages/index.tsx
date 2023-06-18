@@ -9,13 +9,12 @@ interface Iprops {
 }
 
 const app: NextPage<Iprops> = ({ todos }) => {
-    console.log(process.env.NEXT_PUBLIC_API_URL, '클라이언트');
+    console.log(process.env, '클라이언트');
     return <TodoList todos={todos} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
     try {
-        console.log(process.env, '서버');
         const { data } = await getTodosAPI();
         return { props: { todos: data } };
     } catch (e) {

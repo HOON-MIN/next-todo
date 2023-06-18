@@ -4,6 +4,8 @@ import { TodoType } from '../types/todo';
 import CheckMarkIcon from '../statics/svg/check_mark.svg';
 import TrahCanIcon from '../statics/svg/trash-can.svg';
 import styled from 'styled-components';
+import { checkTodoAPI } from '../lib/api/todo';
+import { useRouter } from 'next/dist/client/router';
 
 const Container = styled.div`
     width: '100%';
@@ -128,6 +130,7 @@ type ObjectIndexType = {
 };
 
 const TodoList: React.FC<IProps> = ({ todos }) => {
+    const router = useRouter();
     const getTodoColorsNum = useCallback(() => {
         let red = 0;
         let orange = 0;
@@ -182,6 +185,16 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
         return colors;
     }, [todos]);
 
+    const checkTodo = async (id: number) => {
+        try {
+            console.log('check되었습니다');
+            await checkTodoAPI(id);
+            router.reload();
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <Container>
             <div className="todo-list-header">
@@ -208,10 +221,23 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                             {todo.checked && (
                                 <>
                                     <TrahCanIcon className="todo-trash-can" onClick={() => {}} />
-                                    <CheckMarkIcon className="todo-check-mark" onClick={() => {}} />
+                                    <CheckMarkIcon
+                                        className="todo-check-mark"
+                                        onClick={() => {
+                                            checkTodo(todo.id);
+                                        }}
+                                    />
                                 </>
                             )}
-                            {!todo.checked && <button type="button" className="todo-button" onClick={() => {}} />}
+                            {!todo.checked && (
+                                <button
+                                    type="button"
+                                    className="todo-button"
+                                    onClick={() => {
+                                        checkTodo(todo.id);
+                                    }}
+                                />
+                            )}
                         </div>
                     </li>
                 ))}
